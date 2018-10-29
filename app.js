@@ -29,19 +29,19 @@ app.use(convert(json()));
 // 配置ctx.body解析中间件
 app.use(bodyParser())
 
-// session存储配置
-const sessionMysqlConfig = {
-    user: config.database.USERNAME,
-    password: config.database.PASSWORD,
-    database: config.database.DATABASE,
-    host: config.database.HOST,
-}
+// // session存储配置
+// const sessionMysqlConfig = {
+//     user: config.database.USERNAME,
+//     password: config.database.PASSWORD,
+//     database: config.database.DATABASE,
+//     host: config.database.HOST,
+// }
 
-// 配置session中间件
-app.use(session({
-    key: 'USER_SID',
-    store: new MysqlStore(sessionMysqlConfig)
-}))
+// // 配置session中间件
+// app.use(session({
+//     key: 'USER_SID',
+//     store: new MysqlStore(sessionMysqlConfig)
+// }))
 
 // // 缓存
 // app.use(staticCache(path.join(__dirname, './public'), { dynamic: true }, {
@@ -75,7 +75,7 @@ app.use(result.restify());
 app.use(cors());
 
 // token验证
-app.use(authToken);
+// app.use(authToken);
 
 // 初始化路由中间件
 app.use(routers.routes())
