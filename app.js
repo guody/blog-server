@@ -17,9 +17,9 @@ const routers = require('./routers/index')
 /**
  * 中间件
  */
+const response_formatter = require('./middlewares/response_formatter');
 const logPrint = require('./middlewares/log_print');  //日志输出
 const authToken = require('./middlewares/auth_token')
-const result = require('./middlewares/result')
 
 const app = new Koa()
 
@@ -66,20 +66,19 @@ app.use(views(path.join(__dirname, './views'), {
 // log文件输出
 app.use(logPrint);
 
-// 返回结果处理
-app.use(result.restify());
-
-
-
 // 解决跨域
 app.use(cors());
 
 // token验证
 // app.use(authToken);
 
+//添加格式化处理响应结果的中间件，在添加路由之前调用
+app.use(response_formatter);
+
 // 初始化路由中间件
 app.use(routers.routes())
    .use(routers.allowedMethods())
+// app.use(router.routes());
 
 
 app.on('error', function(err, ctx){

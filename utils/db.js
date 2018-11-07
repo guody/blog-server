@@ -39,11 +39,11 @@ function defineModel(name,attributes) {
     }
 
     //主键自增长 sequelize默认会为模型添加id字段，自增，主键
-    attrs.id = {
-        type:Sequelize.INTEGER,
-        autoIncrement: true,
-        primaryKey:true 
-    }
+    // attrs.id = {
+    //     type:Sequelize.INTEGER,
+    //     autoIncrement: true,
+    //     primaryKey:true 
+    // }
 
     //统一timestamp机制，每个Model必须有createdAt、updatedAt和version，分别记录创建时间、修改时间和版本号
     //version每次修改时自增
@@ -63,21 +63,16 @@ function defineModel(name,attributes) {
     return sequelize.define(name,attrs,{
         tableName:name,
         timestamps:false,
-        hooks:{
-            beforeValidate:function (obj) {
-                let now = Date.now()
-                if(obj.isNewRecord){
-                    console.log('will create entity...' + obj);
-                    // if(!obj.id){
-                    //     obj.id = generateId()
-                    // }
-                    obj.createdAt = now 
-                    obj.updatedAt = now 
-                    obj.version = 0
-                }else{
-                    console.log('will update entity...');
-                    obj.updatedAt = Date.now() 
-                    obj.version++
+        hooks: {
+            beforeValidate: function (obj) {
+                let now = Date.now();
+                if (obj.isNewRecord) {
+                    obj.createdAt = now;
+                    obj.updatedAt = now;
+                    obj.version = 0;
+                } else {
+                    obj.updatedAt = Date.now();
+                    obj.version++;
                 }
             }
         }
