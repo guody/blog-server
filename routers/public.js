@@ -3,18 +3,13 @@
 */
 
 const router = require('koa-router')()
-var Test = require('../model/menu')
+// var Menu = require('../model/menu')
 
-// router.get('/', async (ctx, next) => {
-//     ctx.response.body = '<h1>Index</h1>';
-// });
-
-router.get('/',async (ctx,next)=>{
-    var a = await Test.create({
-        name:'aaaaa----',
-        age:'1'
-    })
-    ctx.body = a;
-})
+// router.get('/',async (ctx,next)=>{
+//     var a = await Menu.create({
+//         menuName:'其他'
+//     })
+//     ctx.body = a;
+// })
 
 module.exports = router;
