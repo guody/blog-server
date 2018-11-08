@@ -1,5 +1,5 @@
 /**
- * 用户类路由
+ * 需要用户登录权限
  */
 const router = require('koa-router')()
 

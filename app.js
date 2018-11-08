@@ -73,12 +73,12 @@ app.use(cors());
 // app.use(authToken);
 
 //添加格式化处理响应结果的中间件，在添加路由之前调用
-app.use(response_formatter);
+//仅对/api开头的url进行格式化处理
+app.use(response_formatter('^/api'));
 
 // 初始化路由中间件
 app.use(routers.routes())
    .use(routers.allowedMethods())
-// app.use(router.routes());
 
 
 app.on('error', function(err, ctx){

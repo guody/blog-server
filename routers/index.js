@@ -3,10 +3,11 @@
  */
 const router = require('koa-router')({prefix: '/api'})  //添加前缀 '/api'
 
-const home = require('./home')  // 首页
+const public = require('./public')
+// const privacy = require('./privacy')  
 
-router.use('/', home.routes(), home.allowedMethods())
-// router.use('/user', user.routes(), user.allowedMethods())
+router.use('/pub', public.routes(), public.allowedMethods())
+// router.use('/priv', privacy.routes(), privacy.allowedMethods())
 
 module.exports = router;
 

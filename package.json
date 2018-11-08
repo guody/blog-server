@@ -1,7 +1,7 @@
 {
   "name": "meituan-server",
-  "version": "1.0.0",
-  "description": "基于koa2的nodejs server",
+  "version": "1.0.1",
+  "description": "基于koa2的blog server",
   "main": "app.js",
   "scripts": {
     "start": "supervisor bin/www",
