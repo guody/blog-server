@@ -1,6 +1,6 @@
 const authUtil = require('../utils/authUtil');
-const ApiErrorNames = require('../config/ApiErrorNames');
-const APIError = require('./result').APIError;
+const ApiErrorNames = require('../error/ApiErrorNames');
+const APIError = require('../error/ApiError');
 
 /**
  * access_token验证中间件

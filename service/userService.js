@@ -6,8 +6,8 @@ const userDao = require('../model/userDao.js')
 const authUtil = require('../utils/authUtil.js');
 const uuidv1 = require('uuid/v1');
 const Base64 = require('js-base64').Base64;
-const ApiErrorNames = require('../config/ApiErrorNames');
-const APIError = require('../middlewares/result').APIError;
+const ApiErrorNames = require('../error/ApiErrorNames');
+const APIError = require('../error/ApiError');
 
 /**
  * 查询所有用户

@@ -3,13 +3,9 @@
 */
 
 const router = require('koa-router')()
-// var Menu = require('../model/menu')
+const menuController = require('../controller/menuController')
 
-// router.get('/',async (ctx,next)=>{
-//     var a = await Menu.create({
-//         menuName:'其他'
-//     })
-//     ctx.body = a;
-// })
+router.get('/findallmenu', menuController.findAllMenu)
+
 
 module.exports = router;

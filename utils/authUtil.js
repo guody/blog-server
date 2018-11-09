@@ -1,7 +1,7 @@
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
-const ApiErrorNames = require('../config/ApiErrorNames');
-const APIError = require('../middlewares/result').APIError;
+const ApiErrorNames = require('../error/ApiErrorNames');
+const APIError = require('../error/ApiError');
 /**
  * 生成UUID
  */

@@ -3,11 +3,11 @@
  */
 const router = require('koa-router')()
 
-const userController = require('../controller/userController')
+const menuController = require('../controller/menuController')
 
-router.get('/findall', userController.findAllUser)
-router.post('/login', userController.login)
-router.post('/regist', userController.regist)
-router.get('/getUser', userController.getUser)
+//添加根目录
+router.get('/insertmenu', menuController.insertMenu)
+//添加分类
+router.get('/insertcategory', menuController.insertCategory)
 
 module.exports = router

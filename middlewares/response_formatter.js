@@ -42,7 +42,6 @@ var url_filter = (pattern) => {
         
         //通过正则的url进行格式化处理
         if(reg.test(ctx.originalUrl)){
-            console.log(ctx.response)
             response_formatter(ctx.response);
         }
     }
