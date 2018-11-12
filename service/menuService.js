@@ -6,10 +6,34 @@ const Category = require('../model/category')
 
 //查询菜单
 let findAllMenu = async () => {
+    // 根目录菜单
     let menus = await Menu.findAll({
-        'attributes': ['id', 'menuName']
+        'attributes': ['id', 'menuName'],
+        raw:true
     });
-    return menus;
+    let menuData = []  //全部菜单
+    menus.map(async (val)=>{
+        console.log(val.id)
+        let childMenuObj = {}  // 子菜单
+        //查询子菜单
+        childMenuObj.childMenu = await Category.findAll({
+            'attributes': ['id','categoryName','menuId'],
+            raw:true,
+            'where':{
+                'menuId':val.id
+            }
+        })
+        console.log(childMenuObj)
+        
+        // let menuObj;
+        // if(childMenuObj.childMenu){
+        //     menuObj = Object.assign({},val,childMenuObj)
+        // }else{
+        //     menuObj = val
+        // }
+        // menuData.push(menuObj)
+    })
+    return menuData;
 };
 
 //插入菜单
@@ -18,6 +42,17 @@ let insertMenu = async () => {
         'menuName':'redis'
     });
     return menus;
+};
+
+//查询根目录下分类
+let findCategory = async (menuId) => {
+    let categoryData = await Menu.findAll({
+        'attributes': ['id','categoryName','menuId'],
+        'where':{
+            'menuId':menuId
+        }
+    });
+    return categoryData;
 };
 
 //插入菜单分类

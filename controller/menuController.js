@@ -4,13 +4,17 @@
 const ApiErrorNames = require('../error/ApiErrorNames');
 const APIError = require('../error/ApiError').APIError;
 const menuService = require('../service/menuService')
+const logger = require('../utils/logUtil')
 
 /**
- * 查询根目录
+ * 查询菜单
  */
 let findAllMenu = async (ctx, next) => {
-    let result = await menuService.findAllMenu();
-    ctx.body = result
+    //查询根目录
+    logger.logInfo('开始查询菜单...')
+    let res = await menuService.findAllMenu();
+    logger.logInfo('查询菜单结束：'+ res)
+    ctx.body = res
 };
 
 
@@ -19,6 +23,13 @@ let insertMenu = async (ctx, next) => {
     let result = await menuService.insertMenu();
     ctx.body = result
 };
+
+
+// // 查询根目录下分类
+// let findCategory = async (ctx, next) => {
+//     let result = await menuService.findCategory();
+//     ctx.body = result
+// };
 
 
 // 增加菜单分类

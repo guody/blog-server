@@ -12,6 +12,7 @@ let logUtil = {};
 let errorLogger = log4js.getLogger('errorLogger');
 let resLogger = log4js.getLogger('resLogger');
 let consoleLogger = log4js.getLogger();
+let infoLogger = log4js.getLogger('infoLogger');
 
 //封装错误日志
 logUtil.logError = function (ctx, error, resTime) {
@@ -29,19 +30,14 @@ logUtil.logResponse = function (ctx, resTime) {
 
 logUtil.logInfo = function (info) {
     if (info) { 
-        consoleLogger.info(formatInfo(info));
+        infoLogger.info(formatInfo(info));
     }
 };
 
 var formatInfo = function (info) {
     var logText = new String();
-    //响应日志开始
-    logText += "\n" + "***************info log start ***************" + "\n";
     //响应内容
-    logText += "info detail: " + "\n" + JSON.stringify(info) + "\n";
-    //响应日志结束
-    logText += "*************** info log end ***************" + "\n";
-
+    logText += "info detail: " + JSON.stringify(info);
     return logText;
 }
 

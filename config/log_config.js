@@ -24,6 +24,16 @@ var responseLogPath = baseLogPath + responsePath + "/" + responseFileName;
 module.exports = {
     "appenders": {
         "out": { "type": 'console' },
+        "infoLogger": {
+            "type": "dateFile",
+            "filename": responseLogPath,
+            "encoding": "utf-8",
+            "maxLogSize": 2000000,
+            "numBackups": 5,
+            "pattern": "-yyyy-MM-dd.log",
+            "alwaysIncludePattern": true,
+            "path": responsePath
+        },
         "errorLogger": {
             "type": "dateFile",
             "filename": errorLogPath,
@@ -50,6 +60,7 @@ module.exports = {
         "default": {"appenders": ['out'], "level": 'info'},
         "errorLogger": {"appenders": ['errorLogger'], "level": 'error'},
         "resLogger": {"appenders": ['resLogger'], "level": 'info'},
+        "infoLogger": {"appenders": ['infoLogger'], "level": 'info'},
         "http": {"appenders": ["resLogger"],"level": "info"}
     },
     "baseLogPath": baseLogPath                  //logs根目录

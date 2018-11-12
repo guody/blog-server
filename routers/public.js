@@ -5,6 +5,7 @@
 const router = require('koa-router')()
 const menuController = require('../controller/menuController')
 
+// 查询菜单
 router.get('/findallmenu', menuController.findAllMenu)
 
 
