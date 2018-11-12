@@ -12,8 +12,7 @@ let findAllMenu = async () => {
         raw:true
     });
     let menuData = []  //全部菜单
-    menus.map(async (val)=>{
-        console.log(val.id)
+    for(let val of menus){
         let childMenuObj = {}  // 子菜单
         //查询子菜单
         childMenuObj.childMenu = await Category.findAll({
@@ -23,16 +22,15 @@ let findAllMenu = async () => {
                 'menuId':val.id
             }
         })
-        console.log(childMenuObj)
-        
-        // let menuObj;
-        // if(childMenuObj.childMenu){
-        //     menuObj = Object.assign({},val,childMenuObj)
-        // }else{
-        //     menuObj = val
-        // }
-        // menuData.push(menuObj)
-    })
+        // console.log(childMenuObj)
+        let menuObj;
+        if(childMenuObj.childMenu.length>0){
+            menuObj = Object.assign({},val,childMenuObj)
+        }else{
+            menuObj = val
+        }
+        menuData.push(menuObj)        
+    }
     return menuData;
 };
 
