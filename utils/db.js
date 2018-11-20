@@ -48,16 +48,16 @@ function defineModel(name,attributes) {
     //统一timestamp机制，每个Model必须有createdAt、updatedAt和version，分别记录创建时间、修改时间和版本号
     //version每次修改时自增
     attrs.createdAt = {
-        type: Sequelize.BIGINT,
-        allowNull: false
+        type: Sequelize.DATE,
+        allowNull: true
     };
     attrs.updatedAt = {
-        type: Sequelize.BIGINT,
-        allowNull: false
+        type: Sequelize.DATE,
+        allowNull: true
     };
     attrs.version = {
         type: Sequelize.BIGINT,
-        allowNull: false
+        allowNull: true
     };    
 
     return sequelize.define(name,attrs,{
@@ -66,12 +66,13 @@ function defineModel(name,attributes) {
         hooks: {
             beforeValidate: function (obj) {
                 let now = Date.now();
+                var time = now.getFullYear() + "-" + (now.getMonth() < 10 ? '0' + (now.getMonth()+1) : (now.getMonth()+1)) + "-" + (now.getDate() < 10 ? '0' + now.getDate() : now.getDate()) ;
                 if (obj.isNewRecord) {
-                    obj.createdAt = now;
-                    obj.updatedAt = now;
+                    obj.createdAt = time;
+                    obj.updatedAt = time;
                     obj.version = 0;
                 } else {
-                    obj.updatedAt = Date.now();
+                    obj.updatedAt = time;
                     obj.version++;
                 }
             }

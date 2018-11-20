@@ -3,6 +3,7 @@
 */
 const Menu = require('../model/menu')
 const Category = require('../model/category')
+const User = require('../model/user')
 
 //查询菜单
 let findAllMenu = async () => {
@@ -37,7 +38,7 @@ let findAllMenu = async () => {
 //插入菜单
 let insertMenu = async () => {
     let menus = await Menu.create({
-        'menuName':'redis'
+        'menuName':'首页'
     });
     return menus;
 };
