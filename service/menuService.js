@@ -37,22 +37,23 @@ let findAllMenu = async () => {
 
 //插入菜单
 let insertMenu = async () => {
+    console.log('---------------------')
     let menus = await Menu.create({
         'menuName':'首页'
     });
     return menus;
 };
 
-//查询根目录下分类
-let findCategory = async (menuId) => {
-    let categoryData = await Menu.findAll({
-        'attributes': ['id','categoryName','menuId'],
-        'where':{
-            'menuId':menuId
-        }
-    });
-    return categoryData;
-};
+// //查询根目录下分类
+// let findCategory = async (menuId) => {
+//     let categoryData = await Menu.findAll({
+//         'attributes': ['id','categoryName','menuId'],
+//         'where':{
+//             'menuId':menuId
+//         }
+//     });
+//     return categoryData;
+// };
 
 //插入菜单分类
 let insertCategory = async () => {
