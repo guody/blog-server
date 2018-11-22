@@ -23,7 +23,6 @@ let findAllMenu = async () => {
                 'menuId':val.id
             }
         })
-        // console.log(childMenuObj)
         let menuObj;
         if(childMenuObj.childMenu.length>0){
             menuObj = Object.assign({},val,childMenuObj)
@@ -37,9 +36,8 @@ let findAllMenu = async () => {
 
 //插入菜单
 let insertMenu = async () => {
-    console.log('---------------------')
     let menus = await Menu.create({
-        'menuName':'首页'
+        'menuName':'其他'
     });
     return menus;
 };
@@ -58,8 +56,8 @@ let insertMenu = async () => {
 //插入菜单分类
 let insertCategory = async () => {
     let cat = await Category.create({
-        'categoryName':'redis',
-        'menuId':'4'
+        'categoryName':'TypeScript',
+        'menuId':'2'
     });
     return menus;
 };

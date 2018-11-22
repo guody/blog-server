@@ -9,17 +9,6 @@ const Base64 = require('js-base64').Base64;
 const ApiErrorNames = require('../error/ApiErrorNames');
 const APIError = require('../error/ApiError');
 
-/**
- * 查询所有用户
- */
-let findAllUser = async () => {
-    let user = await userDao.findAllUser();
-    //把results对象转为字符串，去掉RowDataPacket
-    user = JSON.stringify(user);
-    //把results字符串转为json对象  格式---[{}]
-    user = JSON.parse(user);
-    return user;  
-}
 
 /**
  * 根据用户id查询
@@ -99,6 +88,5 @@ let addUser = async (value)=> {
 module.exports = {
     checkLogin,
     addUser,
-    findAllUser,
     findUserById
 };

@@ -1,4 +1,3 @@
-const moment = require('moment')
 const Sequelize = require('sequelize');
 const config = require('../config/config')
 
@@ -66,7 +65,7 @@ function defineModel(name,attributes) {
         timestamps:false,
         hooks: {
             beforeValidate: function (obj) {
-                let now = Date.now();
+                // let now = Date.now();
                 var time  = new Date().toLocaleString();
                 if (obj.isNewRecord) {
                     obj.createdAt = time;
