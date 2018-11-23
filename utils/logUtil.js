@@ -28,18 +28,23 @@ logUtil.logResponse = function (ctx, resTime) {
     }
 };
 
-logUtil.logInfo = function (info) {
-    if (info) { 
-        infoLogger.info(formatInfo(info));
+logUtil.logInfo = function (msg,info) {
+    if (msg || info) { 
+        infoLogger.info(formatInfo(msg,info));
     }
 };
 
-var formatInfo = function (info) {
+var formatInfo = function (msg,info) {
     var logText = new String();
     //响应内容
-    logText += "info detail: " + JSON.stringify(info);
+    if(info){
+        logText += msg + JSON.stringify(info);
+    }else{
+        logText += msg;
+    }
     return logText;
 }
+
 
 //格式化响应日志
 let formatRes = function (ctx, resTime) {
