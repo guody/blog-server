@@ -3,11 +3,10 @@
 */
 const Menu = require('../model/menu')
 const Category = require('../model/category')
-const User = require('../model/user')
 
 //查询菜单
 let findAllMenu = async () => {
-    // 根目录菜单
+    // 查询根目录菜单
     let menus = await Menu.findAll({
         'attributes': ['id', 'menuName'],
         raw:true

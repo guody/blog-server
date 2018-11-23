@@ -4,11 +4,11 @@
 
 const router = require('koa-router')()
 const menuController = require('../controller/menuController')
-const userController = require('../controller/menuController')
+const userController = require('../controller/userController')
 
 // 查询菜单
 router.get('/findallmenu', menuController.findAllMenu)
 // 用户管理系统登录
-router.get('/login', userController.login)
+router.post('/login', userController.login)
 
 module.exports = router;

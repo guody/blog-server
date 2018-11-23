@@ -7,10 +7,10 @@ const userService = require('../service/userService')
 const logger = require('../utils/logUtil')
 
 let login = async (ctx, next) => {
-    //查询根目录
-    logger.logInfo('开始查询菜单...')
-    let res = await menuService.findAllMenu();
-    logger.logInfo('查询菜单结束：'+ res)
+    let userData = ctx.request.body;
+    logger.logInfo('用户登录信息:',userData)
+    let res = await userService.login(userData);
+    logger.logInfo('登录完毕：',res)
     ctx.body = res
 };
 
