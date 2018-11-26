@@ -29,27 +29,27 @@ app.use(convert(json()));
 // 配置ctx.body解析中间件
 app.use(bodyParser())
 
-// // session存储配置
-// const sessionMysqlConfig = {
-//     user: config.database.USERNAME,
-//     password: config.database.PASSWORD,
-//     database: config.database.DATABASE,
-//     host: config.database.HOST,
-// }
+// session存储配置
+const sessionMysqlConfig = {
+    user: config.database.USERNAME,
+    password: config.database.PASSWORD,
+    database: config.database.DATABASE,
+    host: config.database.HOST,
+}
 
-// // 配置session中间件
-// app.use(session({
-//     key: 'USER_SID',
-//     store: new MysqlStore(sessionMysqlConfig)
-// }))
+// 配置session中间件
+app.use(session({
+    key: 'USER_SID',
+    store: new MysqlStore(sessionMysqlConfig)
+}))
 
-// // 缓存
-// app.use(staticCache(path.join(__dirname, './public'), { dynamic: true }, {
-//     maxAge: 365 * 24 * 60 * 60
-//   }))
-//   app.use(staticCache(path.join(__dirname, './images'), { dynamic: true }, {
-//     maxAge: 365 * 24 * 60 * 60
-// }))
+// 缓存
+app.use(staticCache(path.join(__dirname, './public'), { dynamic: true }, {
+    maxAge: 365 * 24 * 60 * 60
+  }))
+  app.use(staticCache(path.join(__dirname, './images'), { dynamic: true }, {
+    maxAge: 365 * 24 * 60 * 60
+}))
 
 
 // 配置静态资源加载中间件

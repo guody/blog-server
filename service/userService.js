@@ -8,6 +8,7 @@ const uuidv1 = require('uuid/v1');
 const Base64 = require('js-base64').Base64;
 const ApiErrorNames = require('../error/ApiErrorNames');
 const APIError = require('../error/ApiError');
+const logger = require('../utils/logUtil')
 
 
 /** 
@@ -27,35 +28,32 @@ const APIError = require('../error/ApiError');
 /**
  * 用户登录
  */
-let login = async (value) => {
-    let username = value.username || '';
-    let password = value.password || '';
+let login = async (ctx) => {
+    let { username, password } = ctx.request.body;
+    logger.logInfo('用户登录开始:',ctx.request.body)
     // 检查用户名
     let userObj = await User.findOne({
+        'attributes': ['id', 'userName','password'],
         'where':{
             'userName':username
         },
         raw:true
     });
-
+    if(!userObj){
+        throw new APIError(ApiErrorNames.USER_NOT_EXIST); 
+    }
+    // 检查密码
+    password = Base64.encode(md5(password))      
+    if(password !== userObj.password){
+        throw new APIError(ApiErrorNames.PASSWORD_ERROR); 
+    }
+    // 验证通过则将用户信息写入 session 中
+    ctx.session.user = {
+        username,
+        password
+    }
+    logger.logInfo('登录完成.....')
     return userObj;
-    // if (Array.isArray(user) && user.length == 0) {
-    //     throw new APIError(ApiErrorNames.USER_NOT_EXIST); 
-    // }
-
-
-    // // 检查密码
-    // password = Base64.encode(md5(password));   
-    // if(password !== user[0].password){
-    //     throw new APIError(ApiErrorNames.PASSWORD_ERROR); 
-    // }
-
-    // let userId = user[0].userid;
-    // // 登陆成功，生成一个登录token
-    // let access_token = authUtil.genToken(userId);
-
-    // return access_token;
-
 }
 
 
