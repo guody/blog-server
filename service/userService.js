@@ -14,35 +14,30 @@ const logger = require('../utils/logUtil')
 /** 
  * 根据用户名查询用户  
  */
-// let findUserByName = async (username) => {
-//     console.log('查询：',value)
-//     let user = await User.findAll({
-//         'where':{
-//             'username':username
-//         },
-//         raw:true
-//     });
-//     return user;
-// }
-
-/**
- * 用户登录
- */
-let login = async (ctx) => {
-    let { username, password } = ctx.request.body;
-    logger.logInfo('用户登录开始:',ctx.request.body)
-    // 检查用户名
-    let userObj = await User.findOne({
+let findUserByName = async (username) => {
+    let user = await User.findOne({
         'attributes': ['id', 'userName','password'],
         'where':{
             'userName':username
         },
         raw:true
     });
+    return user;
+}
+
+/**
+ * 用户登录
+ */
+let login = async (ctx) => {
+    let { username, password } = ctx.request.body;
+    // 查询用户
+    let userObj = await findUserByName(username);
+    logger.logInfo('查询用户信息:',userObj)
+
     if(!userObj){
         throw new APIError(ApiErrorNames.USER_NOT_EXIST); 
     }
-    // 检查密码
+    // 验证密码
     password = Base64.encode(md5(password))      
     if(password !== userObj.password){
         throw new APIError(ApiErrorNames.PASSWORD_ERROR); 
@@ -52,7 +47,7 @@ let login = async (ctx) => {
         username,
         password
     }
-    logger.logInfo('登录完成.....')
+    logger.logInfo('用户session:',ctx.session.user)
     return userObj;
 }
 

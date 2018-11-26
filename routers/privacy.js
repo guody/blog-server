@@ -5,6 +5,8 @@ const router = require('koa-router')()
 
 const menuController = require('../controller/menuController')
 
+// 用户注销
+router.post('/logout', userController.logout)
 //添加根目录
 router.get('/insertmenu', menuController.insertMenu)
 //添加分类
