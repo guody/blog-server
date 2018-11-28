@@ -34,6 +34,10 @@ let login = async (ctx) => {
     let userObj = await findUserByName(username);
     logger.logInfo('查询用户信息:',userObj)
 
+    if(!username || !password){
+        throw new APIError(ApiErrorNames.USERIFO_NOT_FULL); 
+    }
+
     if(!userObj){
         throw new APIError(ApiErrorNames.USER_NOT_EXIST); 
     }
@@ -42,6 +46,7 @@ let login = async (ctx) => {
     if(password !== userObj.password){
         throw new APIError(ApiErrorNames.PASSWORD_ERROR); 
     }
+
     // 验证通过则将用户信息写入 session 中
     ctx.session.user = {
         username,

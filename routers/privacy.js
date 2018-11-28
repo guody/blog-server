@@ -4,6 +4,7 @@
 const router = require('koa-router')()
 
 const menuController = require('../controller/menuController')
+const userController = require('../controller/userController')
 
 // 用户注销
 router.post('/logout', userController.logout)
