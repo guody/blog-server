@@ -3,7 +3,9 @@ var seq = require('sequelize');
 
 // admin菜单model
 var AdminMenu = db.defineModel('adminmenu',{
-    menuName:seq.STRING(50)
+    menuName:seq.STRING(50),
+    path:seq.STRING(100),
+    icon:seq.STRING(255)
 })
 AdminMenu.sync();
 module.exports = AdminMenu;
