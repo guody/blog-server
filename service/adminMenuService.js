@@ -9,7 +9,7 @@ const AdminCategory = require('../model/admin/adminCategory')
 let findAllAdminMenu = async () => {
     // 查询根目录菜单
     let menus = await AdminMenu.findAll({
-        'attributes': ['id', 'menuName','icon','path'],
+        'attributes': ['id', 'menuName','icon','routeName'],
         raw:true
     });
     let menuData = []  //全部菜单
@@ -17,7 +17,7 @@ let findAllAdminMenu = async () => {
         let childMenuObj = {}  // 子菜单
         //查询子菜单
         childMenuObj.childMenu = await AdminCategory.findAll({
-            'attributes': ['id','categoryName','menuId','path'],
+            'attributes': ['id','categoryName','menuId','routeName'],
             raw:true,
             'where':{
                 'menuId':val.id
