@@ -5,7 +5,8 @@ var seq = require('sequelize');
 var AdminMenu = db.defineModel('adminmenu',{
     menuName:seq.STRING(50),
     routeName:seq.STRING(100),
-    icon:seq.STRING(255)
+    icon:seq.STRING(255),
+    sortNo:seq.INTEGER
 })
 AdminMenu.sync();
 module.exports = AdminMenu;

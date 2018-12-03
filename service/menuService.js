@@ -8,22 +8,33 @@ const Category = require('../model/category')
 let findAllMenu = async () => {
     // 查询根目录菜单
     let menus = await Menu.findAll({
-        'attributes': ['id', 'menuName'],
+        'attributes': [
+            'id', 
+            'menuName',
+            'routeName',
+            'sortNo'
+        ],
         raw:true
     });
     let menuData = []  //全部菜单
     for(let val of menus){
         let childMenuObj = {}  // 子菜单
         //查询子菜单
-        childMenuObj.childMenu = await Category.findAll({
-            'attributes': ['id','categoryName','menuId'],
+        childMenuObj.children = await Category.findAll({
+            'attributes': [
+                'id',
+                ['categoryName','menuName'],
+                'menuId',
+                'sortNo',
+                'routeName',
+            ],
             raw:true,
             'where':{
                 'menuId':val.id
             }
         })
         let menuObj;
-        if(childMenuObj.childMenu.length>0){
+        if(childMenuObj.children.length>0){
             menuObj = Object.assign({},val,childMenuObj)
         }else{
             menuObj = val
