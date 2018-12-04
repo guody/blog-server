@@ -17,7 +17,7 @@ let findAllAdminMenu = async () => {
         let childMenuObj = {}  // 子菜单
         //查询子菜单
         childMenuObj.childMenu = await AdminCategory.findAll({
-            'attributes': ['id','categoryName','menuId','routeName'],
+            'attributes': ['id',['categoryName','menuName'],'menuId','routeName'],
             raw:true,
             'where':{
                 'menuId':val.id
