@@ -13,7 +13,7 @@ let findAdminMenu = async (ctx, next) => {
     //查询根目录
     logger.logInfo('开始查询管理系统菜单...')
     let res = await adminMenuService.findAllAdminMenu();
-    logger.logInfo('查询管理系统菜单结束：'+ res)
+    logger.logInfo('查询管理系统菜单结束：',res)
     ctx.body = res
 };
 
