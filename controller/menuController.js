@@ -20,9 +20,22 @@ let findAllMenu = async (ctx, next) => {
 
 // 插入根目录
 let insertMenu = async (ctx, next) => {
-    let result = await menuService.insertMenu();
+    let menuData = ctx.request.body;
+    logger.logInfo('插入文章根目录开始...',menuData)
+    let result = await menuService.insertMenu(menuData);
+    logger.logInfo('插入文章根目录结束...',result)
     ctx.body = result
 };
+
+// 删除文章根目录
+let deleteMenu = async (ctx, next) => {
+    let menuData = ctx.request.body;
+    logger.logInfo('删除文章根目录开始...',menuData)
+    let result = await menuService.deleteMenu(menuData);
+    logger.logInfo('删除文章根目录结束...',result)
+    ctx.body = result
+};
+
 
 
 // // 查询根目录下分类
@@ -41,6 +54,7 @@ let insertCategory = async (ctx, next) => {
 module.exports = {
     findAllMenu,
     insertMenu,
+    deleteMenu,
     insertCategory
 };
 

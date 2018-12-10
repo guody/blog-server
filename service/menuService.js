@@ -3,6 +3,8 @@
 */
 const Menu = require('../model/menu')
 const Category = require('../model/category')
+const ApiErrorNames = require('../error/ApiErrorNames');
+const APIError = require('../error/ApiError');
 
 //查询菜单
 let findAllMenu = async () => {
@@ -44,24 +46,44 @@ let findAllMenu = async () => {
     return menuData;
 };
 
-//插入菜单
-let insertMenu = async () => {
-    let menus = await Menu.create({
-        'menuName':'其他'
+//插入文章根目录
+let insertMenu = async (menuData) => {
+    // 查询该目录是否存在
+    let menuInfo = await Menu.findOne({
+        'attributes': [
+            'id', 
+            'menuName',
+            'routeName',
+            'sortNo'
+        ],
+        'where':{
+            'menuName':menuData.menuName
+        },
+        raw:true
     });
-    return menus;
+    console.log(menuInfo)
+    if(menuInfo){
+        throw new APIError(ApiErrorNames.MENU_EXIST); 
+    }
+
+    let result = await Menu.create({
+        'menuName':menuData.menuName,
+        'sortNo':menuData.sortNo,
+        'routeName':menuData.routeName
+
+    });
+    return result;
 };
 
-// //查询根目录下分类
-// let findCategory = async (menuId) => {
-//     let categoryData = await Menu.findAll({
-//         'attributes': ['id','categoryName','menuId'],
-//         'where':{
-//             'menuId':menuId
-//         }
-//     });
-//     return categoryData;
-// };
+// 删除文章目录
+let deleteMenu = async (menuData) => {
+    let result = await Menu.destroy({
+        'where':{
+            'id':menuData.id
+        }
+    })
+    return result;
+};
 
 //插入菜单分类
 let insertCategory = async () => {
