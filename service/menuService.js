@@ -48,6 +48,11 @@ let findAllMenu = async () => {
 
 //插入文章根目录
 let insertMenu = async (menuData) => {
+    // 判断sortNo是否为整数
+    if(! /^[1-9]\d*$/.test(menuData.sortNo)){
+        throw new APIError(ApiErrorNames.SORT_NOT_NUMBER); 
+    }
+
     // 查询该目录是否存在
     let menuInfo = await Menu.findOne({
         'attributes': [
@@ -61,7 +66,6 @@ let insertMenu = async (menuData) => {
         },
         raw:true
     });
-    console.log(menuInfo)
     if(menuInfo){
         throw new APIError(ApiErrorNames.MENU_EXIST); 
     }

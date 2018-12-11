@@ -8,6 +8,7 @@ ApiErrorNames.USER_NOT_EXIST = "userNotExist";
 ApiErrorNames.PASSWORD_ERROR = "passwordError";
 ApiErrorNames.USERIFO_NOT_FULL = "userInfoNotFull";
 ApiErrorNames.MENU_EXIST = "menuExist";
+ApiErrorNames.SORT_NOT_NUMBER = "sortNotNumber";
 
 /**
  * API错误名称对应的错误信息
@@ -19,6 +20,7 @@ error_map.set(ApiErrorNames.USER_NOT_EXIST, { code: 101, message: '用户不存�
 error_map.set(ApiErrorNames.PASSWORD_ERROR, { code: 102, message: '密码错误' });
 error_map.set(ApiErrorNames.USERIFO_NOT_FULL, { code: 103, message: '用户登录信息不完善' });
 error_map.set(ApiErrorNames.MENU_EXIST, { code: 104, message: '目录已存在' });
+error_map.set(ApiErrorNames.SORT_NOT_NUMBER, { code: 105, message: '菜单排序值必须为正整数' });
 
 
 
