@@ -79,11 +79,27 @@ let insertMenu = async (menuData) => {
     return result;
 };
 
-// 删除文章目录
+// 删除文章目录以及分类
 let deleteMenu = async (menuData) => {
+    // 查询是否存在菜单分类
+    let catgoryData = await Category.findAll({
+        'where':{
+            'menuId':menuData.menuId
+        }
+    });
+    // 若存在，删除菜单分类
+    if(catgoryData.length>0){
+        let deleteCatgory = await Category.destroy({
+            'where':{
+                'menuId':menuData.menuId
+            }
+        });
+    }
+
+    // 删除菜单
     let result = await Menu.destroy({
         'where':{
-            'id':menuData.id
+            'id':menuData.menuId
         }
     })
     return result;
@@ -98,8 +114,20 @@ let insertCategory = async () => {
     return menus;
 };
 
+//删除菜单分类
+let deleteCategory = async (menuId) => {
+    let cat = await Category.destroy({
+        'where':{
+            'menuId':menuData.menuId
+        }
+    });
+    return menus;
+};
+
 module.exports = {
     findAllMenu,
     insertMenu,
-    insertCategory
+    insertCategory,
+    deleteMenu,
+    deleteCategory
 };

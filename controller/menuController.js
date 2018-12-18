@@ -51,10 +51,17 @@ let insertCategory = async (ctx, next) => {
     ctx.body = result
 };
 
+// 删除菜单分类
+let deleteCategory = async (ctx, next) => {
+    let result = await menuService.deleteCategory();
+    ctx.body = result
+};
+
 module.exports = {
     findAllMenu,
     insertMenu,
     deleteMenu,
-    insertCategory
+    insertCategory,
+    deleteCategory
 };
 
