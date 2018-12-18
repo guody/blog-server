@@ -5,6 +5,7 @@ const Menu = require('../model/menu')
 const Category = require('../model/category')
 const ApiErrorNames = require('../error/ApiErrorNames');
 const APIError = require('../error/ApiError');
+const logger = require('../utils/logUtil')
 
 //查询菜单
 let findAllMenu = async () => {
@@ -106,22 +107,39 @@ let deleteMenu = async (menuData) => {
 };
 
 //插入菜单分类
-let insertCategory = async () => {
-    let cat = await Category.create({
-        'categoryName':'TypeScript',
-        'menuId':'2'
+let insertCategory = async (data) => {
+    // 判断sortNo是否为整数
+    if(! /^[1-9]\d*$/.test(data.sortNo)){
+        throw new APIError(ApiErrorNames.SORT_NOT_NUMBER); 
+    }
+    // 查询该目录是否存在
+    let menuInfo = await Category.findOne({
+        'where':{
+            'categoryName':data.menuName
+        },
+        raw:true
     });
-    return menus;
+    if(menuInfo){
+        throw new APIError(ApiErrorNames.MENU_EXIST); 
+    }
+    let res = await Category.create({
+        'categoryName':data.menuName,
+        'menuId':data.subMenuId,
+        'sortNo':data.sortNo,
+        'routeName':data.routeName
+    });
+    return res;
 };
 
 //删除菜单分类
-let deleteCategory = async (menuId) => {
-    let cat = await Category.destroy({
+let deleteCategory = async (menuData) => {
+    logger.logInfo('菜单...',menuData)
+    let ret = await Category.destroy({
         'where':{
-            'menuId':menuData.menuId
+            'id':menuData.id
         }
     });
-    return menus;
+    return ret;
 };
 
 module.exports = {

@@ -16,8 +16,10 @@ router.post('/insertmenu', menuController.insertMenu)
 //删除文章目录
 router.post('/deleteMenu', menuController.deleteMenu)
 
-//添加文章分类
+//添加文章分类 
 router.post('/insertcategory', menuController.insertCategory)
+// 删除文章分类
+router.post('/deleteCategory', menuController.deleteCategory)
 
 //查询admin菜单
 router.get('/findAdminMenu', adminMenuController.findAdminMenu)

@@ -13,7 +13,7 @@ let findAllMenu = async (ctx, next) => {
     //查询根目录
     logger.logInfo('开始查询菜单...')
     let res = await menuService.findAllMenu();
-    logger.logInfo('查询菜单结束：'+ res)
+    logger.logInfo('查询菜单结束：', res)
     ctx.body = res
 };
 
@@ -37,23 +37,21 @@ let deleteMenu = async (ctx, next) => {
 };
 
 
-
-// // 查询根目录下分类
-// let findCategory = async (ctx, next) => {
-//     let result = await menuService.findCategory();
-//     ctx.body = result
-// };
-
-
 // 增加菜单分类
 let insertCategory = async (ctx, next) => {
-    let result = await menuService.insertCategory();
+    let menuData = ctx.request.body;
+    logger.logInfo('开始添加文章分类...',menuData)
+    let result = await menuService.insertCategory(menuData);
+    logger.logInfo('添加文章分类结束...',result)
     ctx.body = result
 };
 
 // 删除菜单分类
 let deleteCategory = async (ctx, next) => {
-    let result = await menuService.deleteCategory();
+    let menuData = ctx.request.body;
+    logger.logInfo('删除文章分类...',menuData)
+    let result = await menuService.deleteCategory(menuData);
+    logger.logInfo('删除文章分类完毕...',result)
     ctx.body = result
 };
 
