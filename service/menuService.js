@@ -133,7 +133,6 @@ let insertCategory = async (data) => {
 
 //删除菜单分类
 let deleteCategory = async (menuData) => {
-    logger.logInfo('菜单...',menuData)
     let ret = await Category.destroy({
         'where':{
             'id':menuData.id
@@ -142,10 +141,41 @@ let deleteCategory = async (menuData) => {
     return ret;
 };
 
+// 编辑菜单
+let editMenu = async (menuData) => {
+    let ret = await Menu.update({
+        'menuName':menuData.menuName,
+        'sortNo':menuData.sortNo,
+        'routeName':menuData.routeName,
+        'where':{
+            'id':menuData.menuId
+        }
+    });
+    return ret;
+};
+
+// 编辑菜单
+let editCategory = async (menuData) => {
+    let ret = await Category.update({
+        'categoryName':menuData.menuName,
+        'sortNo':menuData.sortNo,
+        'routeName':menuData.routeName,
+        'where':{
+            'id':menuData.menuId
+        }
+    });
+    return ret;
+};
+
+
+
 module.exports = {
     findAllMenu,
     insertMenu,
     insertCategory,
     deleteMenu,
-    deleteCategory
+    deleteCategory,
+    editMenu,
+    editCategory
+
 };

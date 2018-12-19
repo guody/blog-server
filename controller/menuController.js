@@ -55,11 +55,31 @@ let deleteCategory = async (ctx, next) => {
     ctx.body = result
 };
 
+// 菜单分类
+let editMenu = async (ctx, next) => {
+    let menuData = ctx.request.body;
+    logger.logInfo('开始编辑菜单...',menuData)
+    let result = await menuService.editMenu(menuData);
+    logger.logInfo('编辑菜单结束...',result)
+    ctx.body = result
+};
+
+// 编辑分类
+let editCategory = async (ctx, next) => {
+    let menuData = ctx.request.body;
+    logger.logInfo('编辑文章分类...',menuData)
+    let result = await menuService.editCategory(menuData);
+    logger.logInfo('编辑文章分类完毕...',result)
+    ctx.body = result
+};
+
 module.exports = {
     findAllMenu,
     insertMenu,
-    deleteMenu,
     insertCategory,
-    deleteCategory
+    deleteMenu,
+    deleteCategory,
+    editMenu,
+    editCategory
 };
 
