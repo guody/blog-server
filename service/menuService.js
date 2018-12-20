@@ -143,27 +143,32 @@ let deleteCategory = async (menuData) => {
 
 // 编辑菜单
 let editMenu = async (menuData) => {
-    let ret = await Menu.update({
-        'menuName':menuData.menuName,
-        'sortNo':menuData.sortNo,
-        'routeName':menuData.routeName,
-        'where':{
-            'id':menuData.menuId
-        }
-    });
+    let ret = await Menu.update(
+        {
+            'menuName':menuData.menuName,
+            'sortNo':menuData.sortNo,
+            'routeName':menuData.routeName
+        },
+        {
+            'where':{'id':menuData.menuId}
+        }   
+    );
     return ret;
 };
 
-// 编辑菜单
+// 编辑分类
 let editCategory = async (menuData) => {
-    let ret = await Category.update({
-        'categoryName':menuData.menuName,
-        'sortNo':menuData.sortNo,
-        'routeName':menuData.routeName,
-        'where':{
-            'id':menuData.menuId
+    let ret = await Category.update(
+        {
+            'categoryName':menuData.menuName,
+            'sortNo':menuData.sortNo,
+            'routeName':menuData.routeName
+        },
+        {
+            'where':{'id':menuData.menuId}
+    
         }
-    });
+    );
     return ret;
 };
 
