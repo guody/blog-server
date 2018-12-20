@@ -10,6 +10,7 @@ const adminMenuController = require('../controller/adminMenuController')
 
 // 用户注销
 router.post('/logout', userController.logout)
+router.post('/changePwd', userController.changePwd)
 
 //添加文章目录
 router.post('/insertmenu', menuController.insertMenu)

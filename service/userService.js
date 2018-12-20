@@ -48,12 +48,34 @@ let login = async (ctx) => {
     }
 
     // 验证通过则将用户信息写入 session 中
-    ctx.session.user = {
-        username,
-        password
-    }
+    ctx.session.user = userObj
     logger.logInfo('用户session:',ctx.session.user)
     return userObj;
+}
+
+
+/**
+ * 修改密码
+ * @param {*} ctx 
+ */
+let changePwd = async (ctx) => {
+    let { userId, password } = ctx.request.body;
+    //检查密码是否为空
+    if(!password){
+        throw new APIError(ApiErrorNames.PASSWORD_EMPTY);  
+    }
+    // 加密
+    password = Base64.encode(md5(password))
+    // 更新用户表
+    let ret = await Menu.update(
+        {
+            'password':password
+        },
+        {
+            'where':{'id':userId}
+        }   
+    );
+    return ret;
 }
 
 
@@ -91,5 +113,6 @@ let login = async (ctx) => {
 // }
 
 module.exports = {
-    login
+    login,
+    changePwd
 };

@@ -10,11 +10,16 @@ const logger = require('../utils/logUtil')
 let login = async (ctx, next) => {
     logger.logInfo('用户登录开始---请求入参:',ctx.request.body)
     let userObj = await userService.login(ctx);
-    if(userObj){
-        res = {code:'0000',msg:'用户登录成功'}
-    }
     logger.logInfo('登录完成.....')
-    ctx.body = res
+    ctx.body = {user:userObj}
+};
+
+// 修改密码
+let changePwd = async (ctx, next) => {
+    logger.logInfo('修改密码---请求入参:',ctx.request.body)
+    let result = await userService.changePwd(ctx);
+    logger.logInfo('密码修改完成.....')
+    ctx.body = result
 };
 
 
@@ -26,5 +31,6 @@ let logout = async (ctx, next) => {
 
 module.exports = {
     login,
-    logout
+    logout,
+    changePwd
 };

@@ -21,7 +21,8 @@ const routers = require('./routers/index')
  */
 const response_formatter = require('./middlewares/response_formatter');
 const logPrint = require('./middlewares/log_print');  //日志输出
-const authToken = require('./middlewares/auth_token')
+// const authToken = require('./middlewares/auth_token')
+const authSession = require('./middlewares/sessionVerify')   // session验证
 
 const app = new Koa()
 
@@ -88,12 +89,11 @@ app.use(logPrint);
 // 解决跨域
 app.use(cors());
 
-// token验证
-// app.use(authToken);
-
 //添加格式化处理响应结果的中间件，在添加路由之前调用
 //仅对/api开头的url进行格式化处理
 app.use(response_formatter('^/api'));
+
+// app.use(authSession);
 
 // 初始化路由中间件
 app.use(routers.routes())
