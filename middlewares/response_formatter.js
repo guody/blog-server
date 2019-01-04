@@ -43,8 +43,11 @@ var url_filter = (pattern) => {
         
         //通过正则的url进行格式化处理
         if(reg.test(ctx.originalUrl)){
-            response_formatter(ctx.response);
+            if(ctx.status == 200){
+                response_formatter(ctx.response);
+            }
         }
+            
     }
 }
 
