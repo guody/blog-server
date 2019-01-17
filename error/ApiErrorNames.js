@@ -10,6 +10,7 @@ ApiErrorNames.USERIFO_NOT_FULL = "userInfoNotFull";
 ApiErrorNames.MENU_EXIST = "menuExist";
 ApiErrorNames.SORT_NOT_NUMBER = "sortNotNumber";
 ApiErrorNames.INVALID_USER = "invalidUser";
+ApiErrorNames.PARAM_EXCEPTION = 'paramException';
 
 /**
  * API错误名称对应的错误信息
@@ -23,6 +24,9 @@ error_map.set(ApiErrorNames.USERIFO_NOT_FULL, { code: 103, message: '用户登�
 error_map.set(ApiErrorNames.MENU_EXIST, { code: 104, message: '目录已存在' });
 error_map.set(ApiErrorNames.SORT_NOT_NUMBER, { code: 105, message: '菜单排序值必须为正整数' });
 error_map.set(ApiErrorNames.INVALID_USER, { code: 106, message: '登录用户已超时，请重新登录' });
+error_map.set(ApiErrorNames.PARAM_EXCEPTION, { code: 107, message: '参数校验异常' });
+
+
 
 
 
@@ -37,7 +41,7 @@ ApiErrorNames.getErrorInfo = (error_name) => {
 
     //如果没有对应的错误信息，默认'未知错误'
     if (!error_info) {
-        error_name = UNKNOW_ERROR;
+        error_name = ApiErrorNames.UNKNOW_ERROR;;
         error_info = error_map.get(error_name);
     }
     

@@ -67,7 +67,7 @@ let changePwd = async (ctx) => {
     // 加密
     password = Base64.encode(md5(password))
     // 更新用户表
-    let ret = await Menu.update(
+    let ret = await User.update(
         {
             'password':password
         },

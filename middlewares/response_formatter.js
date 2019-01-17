@@ -8,13 +8,13 @@ let response_formatter = async (ctx, next) => {
     //如果有返回数据，将返回数据添加到data中
     if (ctx.body) {
         ctx.body = {
-            code: 0,
+            code: '00',
             message: 'success',
             data: ctx.body
         }
     } else {
         ctx.body = {
-            code: 0,
+            code: '00',
             message: 'success'
         }
     }
